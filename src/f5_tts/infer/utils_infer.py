@@ -120,7 +120,6 @@ def load_vocoder(vocoder_name="vocos", is_local=False, local_path="", device=dev
     
     return vocoder
 
-
 # load asr pipeline
 
 asr_pipe = None

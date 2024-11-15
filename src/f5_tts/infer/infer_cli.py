@@ -129,13 +129,15 @@ if model == "F5-TTS":
             repo_name = "F5-TTS"
             exp_name = "F5TTS_Base"
             ckpt_step = 1200000
-            ckpt_file = str(cached_path(f"hf://SWivid/{repo_name}/{exp_name}/model_{ckpt_step}.safetensors"))
+            ckpt_file = str(cached_path(f"hf://jpgallegoar/F5-Spanish/model_{ckpt_step}.safetensors"))
+            #ckpt_file = str(cached_path(f"hf://SWivid/{repo_name}/{exp_name}/model_{ckpt_step}.safetensors"))
             # ckpt_file = f"ckpts/{exp_name}/model_{ckpt_step}.pt"  # .pt | .safetensors; local path
         elif args.vocoder_name == "bigvgan":
             repo_name = "F5-TTS"
             exp_name = "F5TTS_Base_bigvgan"
             ckpt_step = 1250000
-            ckpt_file = str(cached_path(f"hf://SWivid/{repo_name}/{exp_name}/model_{ckpt_step}.pt"))
+            ckpt_file = str(cached_path(f"hf://jpgallegoar/F5-Spanish/model_{ckpt_step}.safetensors"))
+            #ckpt_file = str(cached_path(f"hf://SWivid/{repo_name}/{exp_name}/model_{ckpt_step}.pt"))
 
 elif model == "E2-TTS":
     model_cls = UNetT
