@@ -89,28 +89,39 @@ def chunk_text(text, max_chars=135):
 def load_vocoder(vocoder_name="vocos", is_local=False, local_path="", device=device):
     if vocoder_name == "vocos":
         if is_local:
-            print(f"Load vocos from local path {local_path}")
+            print(f"Loading Vocos from local path: {local_path}")
             vocoder = Vocos.from_hparams(f"{local_path}/config.yaml")
             state_dict = torch.load(f"{local_path}/pytorch_model.bin", map_location="cpu")
             vocoder.load_state_dict(state_dict)
             vocoder = vocoder.eval().to(device)
         else:
-            print("Download Vocos from huggingface charactr/vocos-mel-24khz")
-            vocoder = Vocos.from_pretrained("charactr/vocos-mel-24khz").to(device)
+            print("Downloading Vocos from huggingface: 'jpgallegoar/vocos-spanish'")
+            vocoder = Vocos.from_pretrained("jpgallegoar/vocos-spanish").to(device)
     elif vocoder_name == "bigvgan":
         try:
             from third_party.BigVGAN import bigvgan
         except ImportError:
-            print("You need to follow the README to init submodule and change the BigVGAN source code.")
+            raise ImportError(
+                "You need to follow the README to initialize submodule and adjust BigVGAN source code."
+            )
         if is_local:
-            """download from https://huggingface.co/nvidia/bigvgan_v2_24khz_100band_256x/tree/main"""
+            print(f"Loading BigVGAN from local path: {local_path}")
             vocoder = bigvgan.BigVGAN.from_pretrained(local_path, use_cuda_kernel=False)
         else:
-            vocoder = bigvgan.BigVGAN.from_pretrained("nvidia/bigvgan_v2_24khz_100band_256x", use_cuda_kernel=False)
+            print("Downloading BigVGAN from huggingface: 'nvidia/bigvgan_v2_24khz_100band_256x'")
+            vocoder = bigvgan.BigVGAN.from_pretrained(
+                "nvidia/bigvgan_v2_24khz_100band_256x", use_cuda_kernel=False
+            )
 
         vocoder.remove_weight_norm()
         vocoder = vocoder.eval().to(device)
+    else:
+        raise ValueError(f"Unsupported vocoder name: {vocoder_name}")
+    
     return vocoder
+
+
+# load asr pipeline
 
 asr_pipe = None
 
