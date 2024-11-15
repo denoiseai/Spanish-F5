@@ -1,0 +1,21 @@
+build:
+  python_version: "3.10"  # Define la versión de Python
+  gpu: true  # Habilitar soporte para GPU
+  cuda: "12.4"  # Especificar la versión de CUDA compatible con tu entorno
+  python_packages:
+    - torch==2.4.0
+    - torchaudio==2.4.0
+    - git+https://github.com/jpgallegoar/Spanish-F5.git
+  system_packages:
+    - sox
+    - ffmpeg
+    - libsndfile1
+    - git
+
+  run:
+    - python3.10 -m ensurepip  # Asegura que pip esté disponible
+    - python3.10 -m pip install --upgrade pip  # Actualiza pip
+    - python3.10 -m pip install cog  # Asegura que cog esté correctamente instalado
+
+predict: "predict.py:Predictor"  # Punto de entrada para predicciones
+
