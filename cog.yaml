@@ -5,7 +5,7 @@ build:
   python_packages:
     - torch==2.4.0
     - torchaudio==2.4.0
-    - git+https://github.com/jpgallegoar/Spanish-F5.git
+    - git+https://github.com/denoiseai/Spanish-F5.git
   system_packages:
     - sox
     - ffmpeg
