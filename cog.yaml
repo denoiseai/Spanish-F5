@@ -6,6 +6,8 @@ build:
     - torch==2.4.0
     - torchaudio==2.4.0
     - git+https://github.com/denoiseai/Spanish-F5.git
+    - huggingface_hub
+
   system_packages:
     - sox
     - ffmpeg
