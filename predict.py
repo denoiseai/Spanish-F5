@@ -7,6 +7,8 @@ class Predictor(BasePredictor):
         self,
         ref_audio: Path = Input(description="Path to the reference audio file"),
         gen_text: str = Input(description="Text to synthesize"),
+        model: str = Input(description="Model to use", default="F5-TTS"),
+
     ) -> Path:
         """Run F5-TTS inference and return the synthesized audio file."""
         
@@ -16,6 +18,7 @@ class Predictor(BasePredictor):
         # Construye el comando de inferencia
         command = [
             "f5-tts_infer-cli",
+            "--model", model,
             "--ref_audio", str(ref_audio),
             "--gen_text", gen_text,
         ]
